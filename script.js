@@ -35,8 +35,13 @@ function startRecording() {
   };
 
   socket.onmessage = (event) => {
+    // Add the pop-up effect for new text
+    transcriptionDiv.classList.remove("pop-up");
+    void transcriptionDiv.offsetWidth; // Trigger reflow
+    transcriptionDiv.classList.add("pop-up");
+    
     transcriptionDiv.textContent = event.data + ' '; // Display transcribed text
-    console.log("Text received"+ event.data)
+    console.log("Text received: " + event.data);
   };
 
   socket.onerror = (error) => {
